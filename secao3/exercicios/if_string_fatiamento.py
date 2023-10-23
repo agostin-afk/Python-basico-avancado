@@ -18,7 +18,7 @@ idade = int(input('informe a sua idade: '))
 if (nome and idade):
     print(f'Seu nome é {nome}\n'
           f'Seu nome invertido fica {nome[::-1]}\n'
-          f'Seu nome {"" if "" in nome else "não"} contém espaços\n'
+          f'Seu nome {"" if " " in nome else "não "}contém espaços\n'
           f'Seu nome tem {len(nome)} letras\n'
           f'A primeira letra do seu nome é: {nome[0]}\n'
           f'A ultima letra do seu nome é {nome[-1]}')
