@@ -14,10 +14,11 @@ na palavra secreta.
 Faça a contagem de tentativas do seu
 usuário.
 """
-palavra_secreta = "Agostinho"
+palavra_secreta = "agostinho"
 palavra_censura = ""
+letras_acerto = ""
 while True:
-    chute = input('Tente acertar uma letra: ').upper()
+    chute = input('Tente acertar uma letra: ').lower()
     if len(chute) > 1:
         print('informe apenas uma letra.')
         continue
@@ -30,15 +31,13 @@ while True:
     else:
         print("informe uma letra, não numero ou caractere especial.")
         continue
-    try:
-       for i in palavra_secreta:
-           palavra_censura +="*"
-           if chute == palavra_secreta[i].upper():
-               palavra_censura[i].replace(chute)
-       else:
-           print(f'Sua palavra secreta é: {palavra_censura}')
-        
-    
-    except:
-        ...
+    if chute in palavra_secreta:
+        letras_acerto += chute
+    palavra_censura = ""
+    for letra_secreta in palavra_secreta:
+        if letra_secreta in letras_acerto:
+            palavra_censura += letra_secreta
+        else:
+            palavra_censura += '*'
+    print(palavra_censura)
 
