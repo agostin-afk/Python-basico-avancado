@@ -1,3 +1,4 @@
+import os
 """
 Faça um jogo para o usuário adivinhar qual
 a palavra secreta.
@@ -14,11 +15,13 @@ na palavra secreta.
 Faça a contagem de tentativas do seu
 usuário.
 """
-palavra_secreta = "agostinho"
-palavra_censura = ""
+palavra_secreta = "agos"
+palava_formada = ""
 letras_acerto = ""
+qtd_tentativas = 0
 while True:
     chute = input('Tente acertar uma letra: ').lower()
+    qtd_tentativas += 1
     if len(chute) > 1:
         print('informe apenas uma letra.')
         continue
@@ -33,11 +36,15 @@ while True:
         continue
     if chute in palavra_secreta:
         letras_acerto += chute
-    palavra_censura = ""
+    palava_formada = ""
     for letra_secreta in palavra_secreta:
         if letra_secreta in letras_acerto:
-            palavra_censura += letra_secreta
+            palava_formada += letra_secreta
         else:
-            palavra_censura += '*'
-    print(palavra_censura)
+            palava_formada += '*'
+    print(palava_formada)
+    if palava_formada == palavra_secreta:
+        os.system('cls')
+        print(f'Parabéns você acertou a palavra que era "{palava_formada}" em {qtd_tentativas} tentativas')
+        break
 
