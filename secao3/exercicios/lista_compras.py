@@ -17,7 +17,7 @@ while True:
         if escolha == 'a':
             os.system('cls')
             indice = int(input('escolha o indice: ')) -1
-            lista.pop(indice)
+            del lista[indice]
         elif escolha == 'i':
             os.system('cls')
             valor = input('informe oque deseja inserir: ')
@@ -31,4 +31,7 @@ while True:
         print('Operação inválida, erro de indice, tente novamente!!')
     except KeyboardInterrupt:
         print('sistema interrompido pelo usuario!')
-        break
+    except ValueError:
+            print('Por favor digite número int.')
+    except Exception:
+            print('Erro desconhecido')
