@@ -16,3 +16,6 @@ lista_nomes = ['agosto', 'lucas', 'paulo']
 nome1, *_ = lista_nomes
 
 print(nome1)
+# desempacotamento de iteraveis:
+string = 'agostinho'
+print(*string)#o defalt sep = ' '
