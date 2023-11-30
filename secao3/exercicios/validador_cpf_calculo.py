@@ -1,37 +1,32 @@
 import re
-'''
-0  8  9 7 8 0 0 7 3 7 6
-11 10 9 8 7 6 5 4 3 2 1
- 
-'''
 multiplicacao_1 = 10
 multiplicacao_2 = 11
-soma_1 = 0
-soma_2 = 0
-#cpf = input('informe seu cpf: ')
+cal_num1 = cal_num2 =0
+
+
 cpf = re.sub(r'[^0-9]', '', input('informe seu cpf: '))
-entrada = cpf
-teste_sequencia = entrada != cpf[0] * len(cpf)
+teste_sequencia = cpf != cpf[0] * len(cpf)
 if teste_sequencia:
-    ...
     for i,k in enumerate(cpf):
         mult_valor_1 = int(k) * multiplicacao_1
         mult_valor_2 = int(k) * multiplicacao_2
-        soma_1 += mult_valor_1
-        soma_2 += mult_valor_2
+        cal_num1 += mult_valor_1
+        cal_num2 += mult_valor_2
         multiplicacao_1 -= 1
         multiplicacao_2 -= 1
         if i == 8:
             penultimo_digito = cpf[i+1]
-            soma_digi_1 = soma_1 * 10
-            soma_digi_1 = soma_digi_1%11
-            resultado_digi_1 = soma_digi_1 if soma_digi_1 <= 9 else 0
+            cal_num1 *= 10
+            cal_num1 %= 11
+            resultado_digi_1 = cal_num1 if cal_num1 <= 9 else 0
         if i == 9:
             ultimo_digito = cpf[i+1]
-            soma_digi_2 = soma_2 * 10
-            soma_digi_2 %= 11
-            resultado_digi_2 = soma_digi_2 if soma_digi_2 <= 9 else 0
+            cal_num2 *= 10
+            cal_num2 %= 11
+            resultado_digi_2 = cal_num2 if cal_num2 <= 9 else 0
     if resultado_digi_2 == int(ultimo_digito) and resultado_digi_1 == int(penultimo_digito):
         print('cpf valido!')   
+    else:
+        print('cpf invalido!')
 else:
     print('você digitou o mesmo numero em sequência, tente novamente!')
