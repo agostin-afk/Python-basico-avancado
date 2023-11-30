@@ -22,18 +22,16 @@ if teste_sequencia:
         multiplicacao_1 -= 1
         multiplicacao_2 -= 1
         if i == 8:
-            penultimo_digito = k
+            penultimo_digito = cpf[i+1]
             soma_digi_1 = soma_1 * 10
             soma_digi_1 = soma_digi_1%11
             resultado_digi_1 = soma_digi_1 if soma_digi_1 <= 9 else 0
         if i == 9:
-            ultimo_digito = k
+            ultimo_digito = cpf[i+1]
             soma_digi_2 = soma_2 * 10
             soma_digi_2 %= 11
             resultado_digi_2 = soma_digi_2 if soma_digi_2 <= 9 else 0
-        
-    # print(cpf[9:])
-    
-    
+    if resultado_digi_2 == int(ultimo_digito) and resultado_digi_1 == int(penultimo_digito):
+        print('cpf valido!')   
 else:
     print('você digitou o mesmo numero em sequência, tente novamente!')
