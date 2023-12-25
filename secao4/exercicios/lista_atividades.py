@@ -137,10 +137,13 @@ while True:
  """
 
 from os import system
-
+import json
 
 tarefas = []
 tarefas_refazer = []
+
+def ler():
+    ...
 def limpar():
     system('cls')
 
@@ -179,7 +182,7 @@ def sair(tarefas):
         return True
     print('sua lista final foi: ')
     for tarefa in tarefas:
-        print(f'{tarefa}\t')
+        print(f'\t{tarefa=}')
         return True
     
 
