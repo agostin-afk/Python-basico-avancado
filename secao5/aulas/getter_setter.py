@@ -10,5 +10,6 @@ class Caneta:
         self.cor_tinta = valor
         
 caneta1 = Caneta('Bic', 'azul')
+print(caneta1.cor)
 caneta1.cor = 'vermelho'
 print(caneta1.cor)
