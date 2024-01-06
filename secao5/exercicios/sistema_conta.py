@@ -65,6 +65,11 @@ class ContaPoupanca(Conta):
         print('não foi possivel sacar esse valor')
         self.detalhar(f'(SAQUE NEGADO: {valor})')
         return self.saldo
+    
+    def __repr__(self) -> str:
+        class_name = type(self).__name__
+        attrs = f'({self.agencia!r}, {self.conta!r}, {self.saldo!r})'
+        return f'{class_name} {attrs}'
 
 
 class ContaCorrente(Conta):
@@ -85,7 +90,10 @@ class ContaCorrente(Conta):
         return self.saldo
 
     def __repr__(self) -> str:
-        return super().__repr__()
+        class_name = type(self).__name__
+        attrs = f'({self.agencia!r}, {self.conta!r}, {self.saldo!r},'\
+            f' {self.limite!r})'
+        return f'{class_name} {attrs}'
 
 
 if __name__ == '__main__':
