@@ -1,5 +1,5 @@
 import json
-CAMINHO_ARQUIVO = 'secao5\exercicios\salvando_dados_classes.json'
+CAMINHO_ARQUIVO = 'secao5\\exercicios\\salvando_dados_classes.json'
 
 class Pessoa:
     def __init__(self, nome, idade):
