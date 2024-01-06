@@ -37,7 +37,7 @@ Banco autentica por um método.
 
 class Conta(ABC):
     def __init__(self, agencia: int, conta: int, saldo: float):
-        self.agencia = agencia 
+        self.agencia = agencia
         self.conta = conta
         self.saldo = saldo
 
@@ -78,11 +78,14 @@ class ContaCorrente(Conta):
         if valor_pos_saque >= limite_maximo:
             self.saldo -= valor
             self.detalhar(f'(SAQUE: {valor} )')
-            return self.saldo 
+            return self.saldo
         print('Não foi possivel sacar esse valor')
         print(f'Seu limite é: {-self.limite:.2f}')
         self.detalhar(f'(SAQUE NEGADO: {valor:.2f} )')
         return self.saldo
+
+    def __repr__(self) -> str:
+        return super().__repr__()
 
 
 if __name__ == '__main__':
@@ -90,7 +93,7 @@ if __name__ == '__main__':
     cp1 = ContaPoupanca(111, 222, 0)
     cp1.sacar(1)
     cp1.depositar(1)
-    cp1.sacar(1) 
+    cp1.sacar(1)
     print('#'*50)
     cc1 = ContaCorrente(111, 222, 0, 10)
     cc1.sacar(2)
