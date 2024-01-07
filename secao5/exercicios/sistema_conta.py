@@ -65,7 +65,7 @@ class ContaPoupanca(Conta):
         print('não foi possivel sacar esse valor')
         self.detalhar(f'(SAQUE NEGADO: {valor})')
         return self.saldo
-    
+
     def __repr__(self) -> str:
         class_name = type(self).__name__
         attrs = f'({self.agencia!r}, {self.conta!r}, {self.saldo!r})'
