@@ -1,53 +1,52 @@
 import sys 
+from PySide6.QtCore import Slot
 from PySide6.QtWidgets import QWidget, QPushButton, QMainWindow, QApplication, QGridLayout
 
 app = QApplication(sys.argv)
 
-botao1 = QPushButton('botao 1')
-botao2 = QPushButton('botao 2')
-botao1.setStyleSheet('font-size: 12px; font-weight: bold; color: red')
-botao2.setStyleSheet('font-size: 12px; font-weight: bold; color: green')
+class MyWindow(QMainWindow):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.botao1 = QPushButton('botao 1')
+        self.botao2 = QPushButton('botao 2')
+        self.botao1.setStyleSheet('font-size: 12px; font-weight: bold; color: red')
+        self.botao2.setStyleSheet('font-size: 12px; font-weight: bold; color: green') 
+        self.central_widget = QWidget()
+        self.layout_grid = QGridLayout()
 
-window = QMainWindow()
-central_widget = QWidget()
-layout = QGridLayout()
-
-layout.addWidget(botao1)
-layout.addWidget(botao2)
+        self.layout_grid.addWidget(self.botao1)
+        self.layout_grid.addWidget(self.botao2)
 
 
-central_widget.setLayout(layout)
+        self.central_widget.setLayout(self.layout_grid)
 
-window.setCentralWidget(central_widget)
-window.setWindowTitle('minha janela')
+        self.setCentralWidget(self.central_widget)
+        self.setWindowTitle('minha janela')
 
-status_bar = window.statusBar()
-status_bar.showMessage('minha primeira mensagem')
+        self.status_bar = self.statusBar()
+        self.status_bar.showMessage('minha primeira mensagem')
+        self.menu = self.menuBar()
+        self.primeiro_menu = self.menu.addMenu('primeiro menu')
+        
+        self.primeira_acao = self.primeiro_menu.addAction('primeira acao')
+        self.primeira_acao.triggered.connect(self.slot_segunda_mensagem)
+        self.segunda_acao = self.primeiro_menu.addAction('segunda acao')
+        self.segunda_acao.setCheckable(True)
+        self.segunda_acao.toggled.connect(self.check)
+        self.segunda_acao.hovered.connect(self.check)
+        self.botao1.clicked.connect(self.check)
 
-def slot_segunda_mensagem(sb):
-    sb.showMessage('minha segunda mensagem')
+    @Slot()
+    def slot_segunda_mensagem(self):
+        self.status_bar.showMessage('minha segunda mensagem')
     
-def check(checked):
-    print('esta marcado ?:',checked)
-    
-def verificar_check(action):
-    def inner():
-        check(action.isChecked())
-    return inner
+    @Slot()    
+    def check(self):
+        print('esta marcado ?:',self.segunda_acao.isChecked())
+        
 
-menu = window.menuBar()
-primeiro_menu = menu.addMenu('primeiro menu')
 
-primeira_acao = primeiro_menu.addAction('primeira acao')
-primeira_acao.triggered.connect(lambda: slot_segunda_mensagem(status_bar))
-
-segunda_acao = primeiro_menu.addAction('segunda acao')
-
-segunda_acao.setCheckable(True)
-segunda_acao.toggled.connect(check)
-segunda_acao.hovered.connect(verificar_check(segunda_acao))
-
-botao1.clicked.connect(verificar_check(segunda_acao))
+window = MyWindow()
 
 window.show()
 
