@@ -7,10 +7,8 @@ app = QApplication(sys.argv)
 class MyWindow(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.botao1 = QPushButton('botao 1')
-        self.botao2 = QPushButton('botao 2')
-        self.botao1.setStyleSheet('font-size: 12px; font-weight: bold; color: red')
-        self.botao2.setStyleSheet('font-size: 12px; font-weight: bold; color: green') 
+        self.botao1 = self.make_button('botao 1','red')
+        self.botao2 = self.make_button('botao 2', 'green')
         self.central_widget = QWidget()
         self.layout_grid = QGridLayout()
 
@@ -43,6 +41,10 @@ class MyWindow(QMainWindow):
     @Slot()    
     def check(self):
         print('esta marcado ?:',self.segunda_acao.isChecked())
+    def make_button(self, text, color):
+        bttn = QPushButton(text)
+        bttn.setStyleSheet(f'font-size: 12px; font-weight: bold; color: {color}')
+        return bttn
         
 
 
