@@ -1,17 +1,19 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLineEdit,QPushButton
 from main_window import MainWindow
 from PySide6.QtGui import QIcon
 from variables import ICON_FILE
+from display import Display
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = MainWindow()
-    window.adjustFixedSize()
+    display = Display()
+    botao1 = QPushButton('botoa 1')
     icon = QIcon(str(ICON_FILE))
+    window.addWidgetVlayout(display,True)
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
-
     window.show()
     app.exec()

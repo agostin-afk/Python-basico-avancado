@@ -5,7 +5,7 @@ class MainWindow(QMainWindow):
         super().__init__(parent, *args, **kwargs)
         self.cw = QWidget()
         self.setCentralWidget(self.cw)
-        self.vLayout = QVBoxLayout()
+        self.vLayout = QVBoxLayout(self.cw)
         self.setLayout(self.vLayout)
         self.setWindowTitle('Coloque o titulo')
         
