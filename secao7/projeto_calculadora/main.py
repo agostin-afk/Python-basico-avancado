@@ -6,21 +6,34 @@ from variables import ICON_FILE
 from display import Display
 from infor import Infor
 from tema import setupTheme
-from buttons import Button
+from buttons import Button, ButtonsGrid
 
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     setupTheme()
     window = MainWindow()
-    display = Display()
-    botao1 = Button('botoa 1')
-    icon = QIcon(str(ICON_FILE))
+    
+    
     info = Infor('teste')
     window.addWidgetVlayout(info, False)
+    
+    
+    display = Display()
     window.addWidgetVlayout(display,False)
-    window.addWidgetVlayout(botao1, True)
+    
+    
+    buttonsGrid = ButtonsGrid()
+    window.vLayout.addLayout(buttonsGrid)
+    window.adjustFixedSize()
+    
+    
+    
+    icon = QIcon(str(ICON_FILE))
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
+    
+    
+    
     window.show()
     app.exec()
