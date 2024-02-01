@@ -6,6 +6,7 @@ from variables import ICON_FILE
 from display import Display
 from infor import Infor
 from tema import setupTheme
+from buttons import Button
 
 
 if __name__ == '__main__':
@@ -13,11 +14,12 @@ if __name__ == '__main__':
     setupTheme()
     window = MainWindow()
     display = Display()
-    botao1 = QPushButton('botoa 1')
+    botao1 = Button('botoa 1')
     icon = QIcon(str(ICON_FILE))
     info = Infor('teste')
     window.addWidgetVlayout(info, False)
-    window.addWidgetVlayout(display,True)
+    window.addWidgetVlayout(display,False)
+    window.addWidgetVlayout(botao1, True)
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
     window.show()
