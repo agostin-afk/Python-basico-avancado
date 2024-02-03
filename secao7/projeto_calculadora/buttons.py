@@ -2,7 +2,12 @@ from typing import Optional
 from PySide6.QtWidgets import QPushButton, QGridLayout, QWidget
 from variables import *
 from utils import NumOrDot, isValidNumber
-from display import Display
+from typing import TYPE_CHECKING
+
+
+if TYPE_CHECKING:
+    from display import Display
+    from infor import Infor
 
 
 
@@ -18,7 +23,7 @@ class Button(QPushButton):
         
         
 class ButtonsGrid(QGridLayout):
-    def __init__(self, display: Display, *args, **kwargs) -> None:
+    def __init__(self, display: 'Display', info: 'Infor', *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         
         self._gridMask = [
@@ -29,7 +34,19 @@ class ButtonsGrid(QGridLayout):
             ['',  '0', '.', '='],
         ]
         self.display = display
+        self.info = info
+        self._equation = ''
         self._makeGrid()
+        self.equation = 'agosto'
+        
+    @property
+    def equation(self):
+        return self._equation
+
+    @equation.setter
+    def equation(self, value):
+        self._equation = value
+        self.info.setText(value)
     def _makeGrid(self):
         for i, row in enumerate(self._gridMask):
             for j, text in enumerate(row):
