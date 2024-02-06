@@ -1,10 +1,10 @@
 from typing import Optional
 from PySide6.QtWidgets import QPushButton, QGridLayout, QWidget
 from variables import *
-from utils import NumOrDot, isValidNumber
+from utils import NumOrDot, isValidNumber, NumTransform
 from typing import TYPE_CHECKING
 from PySide6.QtCore import Slot
-
+import math
 
 if TYPE_CHECKING:
     from display import Display
@@ -79,9 +79,16 @@ class ButtonsGrid(QGridLayout):
         
         if text == 'C':
             self._connectButtonClicked(button, self._Clear)
-        if text in '+-*/':
+            
+        if text == '◀':
+            self._connectButtonClicked(button, self.display.backspace)
+            
+        if text in '+-*/^':
             self._connectButtonClicked(button, 
             self._makeButtonDisplaySlot(self._OperatorClicked,button))
+        
+        if text in '=':
+            self._connectButtonClicked(button, self._eq)
     def _makeButtonDisplaySlot(self, func, *args, **kwargs):
 
         def realSlot():
@@ -92,8 +99,36 @@ class ButtonsGrid(QGridLayout):
         newDisplayValue = self.display.text() + buttonText
 
         if not isValidNumber(newDisplayValue):
+            
             return
         self.display.insert(buttonText)
+    
+    def _eq(self):
+        displayText = self.display.text()
+        if not isValidNumber(displayText):
+            return
+        self._right = NumTransform(displayText)
+        self.equation = f'{self._left} {self._op} {self._right}'
+        print(self.equation)
+        result = 'Estouro'
+        try:
+            if '^' in self.equation and isinstance(self._left, (float, int)):
+                print(result)
+                result = math.pow(self._left, self._right)
+            else:
+                result = eval(self.equation)
+            result = NumTransform(result)
+        except ZeroDivisionError as e:
+            print(f"Erro: {e}")
+        except OverflowError as e:
+            print(f"Erro 45: {e}")
+        self.display.clear()
+        self.info.setText(f"{self.equation} = {result}")
+        self._left = result
+        self._right = None
+        if result == 'Estouro':
+            self._left = None
+        
     def _OperatorClicked(self, button):
         text = button.text()
         displayText = self.display.text()
@@ -103,7 +138,7 @@ class ButtonsGrid(QGridLayout):
             print('nada no valor da esquerda')
         
         if self._left is None:
-            self._left = float(displayText)
+            self._left = NumTransform(displayText)
         self._op = text
         self.equation = f'{self._left} {self._op}'
         
