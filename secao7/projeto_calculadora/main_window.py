@@ -7,7 +7,7 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.cw)
         self.vLayout = QVBoxLayout(self.cw)
         self.setLayout(self.vLayout)
-        self.setWindowTitle('Coloque o titulo')
+        self.setWindowTitle('Calculadora do Agosto')
         
     def adjustFixedSize(self):
         self.adjustSize()

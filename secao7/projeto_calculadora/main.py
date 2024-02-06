@@ -1,12 +1,12 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLineEdit,QPushButton
+from PySide6.QtWidgets import QApplication
 from main_window import MainWindow
 from PySide6.QtGui import QIcon
 from variables import ICON_FILE
 from display import Display
 from infor import Infor
 from tema import setupTheme
-from buttons import Button, ButtonsGrid
+from buttons import ButtonsGrid
 
 
 if __name__ == '__main__':
@@ -15,7 +15,7 @@ if __name__ == '__main__':
     window = MainWindow()
     
     
-    info = Infor('teste')
+    info = Infor('Calculadora')
     window.addWidgetVlayout(info, False)
     
     

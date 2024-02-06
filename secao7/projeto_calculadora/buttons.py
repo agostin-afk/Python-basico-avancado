@@ -3,6 +3,7 @@ from PySide6.QtWidgets import QPushButton, QGridLayout, QWidget
 from variables import *
 from utils import NumOrDot, isValidNumber
 from typing import TYPE_CHECKING
+from PySide6.QtCore import Slot
 
 
 if TYPE_CHECKING:
@@ -36,8 +37,10 @@ class ButtonsGrid(QGridLayout):
         self.display = display
         self.info = info
         self._equation = ''
+        self._left = None
+        self._right = None
+        self._op = None
         self._makeGrid()
-        self.equation = 'agosto'
         
     @property
     def equation(self):
@@ -73,9 +76,14 @@ class ButtonsGrid(QGridLayout):
     
     def _configEspecialButtons(self, button):
         text = button.text()
+        
         if text == 'C':
             self._connectButtonClicked(button, self._Clear)
+        if text in '+-*/':
+            self._connectButtonClicked(button, 
+            self._makeButtonDisplaySlot(self._OperatorClicked,button))
     def _makeButtonDisplaySlot(self, func, *args, **kwargs):
+
         def realSlot():
             func(*args, **kwargs)
         return realSlot
@@ -86,5 +94,23 @@ class ButtonsGrid(QGridLayout):
         if not isValidNumber(newDisplayValue):
             return
         self.display.insert(buttonText)
+    def _OperatorClicked(self, button):
+        text = button.text()
+        displayText = self.display.text()
+        self.display.clear()
+       
+        if  not isValidNumber(displayText) and self._left is None:
+            print('nada no valor da esquerda')
+        
+        if self._left is None:
+            self._left = float(displayText)
+        self._op = text
+        self.equation = f'{self._left} {self._op}'
+        
+        print(text)
     def _Clear(self):
+        self._left = None
+        self._right = None
+        self._op = None
+        self.equation = ''
         self.display.clear()
