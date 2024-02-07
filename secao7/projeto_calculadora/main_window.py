@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
+from PySide6.QtWidgets import QMessageBox, QMainWindow, QVBoxLayout, QWidget
 
 class MainWindow(QMainWindow):
     def __init__(self, parent: QWidget | None = None, *args, **kwargs) -> None:
@@ -17,3 +17,5 @@ class MainWindow(QMainWindow):
         self.vLayout.addWidget(widget)
         if autoajuste:
             self.adjustFixedSize()
+    def makeMsgBox(self):
+        return QMessageBox(self)

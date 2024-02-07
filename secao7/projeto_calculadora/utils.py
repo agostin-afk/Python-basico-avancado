@@ -8,11 +8,15 @@ def NumTransform(string:str) -> (float | int):
     try:
         float(string)
     except ValueError as e:
-        print(f"Erro de valor: {e}")    
-    if float(string) == int(float(string)):
-        return int(float(string))
-    else:
-        return float(string)   
+        print(f"Erro de valor: {e}")  
+    try:
+        if float(string) == int(float(string)):
+            return int(float(string))
+        else:
+            return float(string)
+    except ValueError as e:
+        return f'Erro 45: {e}'
+
 
 def isValidNumber(string: str):
     valid = False

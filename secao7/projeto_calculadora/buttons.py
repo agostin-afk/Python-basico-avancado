@@ -8,6 +8,7 @@ import math
 
 if TYPE_CHECKING:
     from display import Display
+    from main_window import MainWindow
     from infor import Infor
 
 
@@ -24,7 +25,7 @@ class Button(QPushButton):
         
         
 class ButtonsGrid(QGridLayout):
-    def __init__(self, display: 'Display', info: 'Infor', *args, **kwargs) -> None:
+    def __init__(self, display: 'Display', info: 'Infor',window: 'MainWindow', *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         
         self._gridMask = [
@@ -40,6 +41,7 @@ class ButtonsGrid(QGridLayout):
         self._left = None
         self._right = None
         self._op = None
+        self.window = window
         self._makeGrid()
         
     @property
@@ -119,9 +121,9 @@ class ButtonsGrid(QGridLayout):
                 result = eval(self.equation)
             result = NumTransform(result)
         except ZeroDivisionError as e:
-            print(f"Erro: {e}")
+            self._showError(f"Erro: {e}")
         except OverflowError as e:
-            print(f"Erro 45: {e}")
+            self._showError(f"Erro 45: {e}")
         self.display.clear()
         self.info.setText(f"{self.equation} = {result}")
         self._left = result
@@ -135,7 +137,7 @@ class ButtonsGrid(QGridLayout):
         self.display.clear()
        
         if  not isValidNumber(displayText) and self._left is None:
-            print('nada no valor da esquerda')
+            self._showError('nada no valor da esquerda')
         
         if self._left is None:
             self._left = NumTransform(displayText)
@@ -149,3 +151,7 @@ class ButtonsGrid(QGridLayout):
         self._op = None
         self.equation = ''
         self.display.clear()
+    def _showError(self, text):
+        msgBox = self.window.makeMsgBox()
+        msgBox.setText(text)
+        msgBox.exec()
