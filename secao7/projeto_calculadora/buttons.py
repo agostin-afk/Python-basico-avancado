@@ -154,4 +154,5 @@ class ButtonsGrid(QGridLayout):
     def _showError(self, text):
         msgBox = self.window.makeMsgBox()
         msgBox.setText(text)
+        msgBox.setIcon(msgBox.Icon.Critical)
         msgBox.exec()
