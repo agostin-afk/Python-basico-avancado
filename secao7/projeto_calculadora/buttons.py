@@ -120,8 +120,11 @@ class ButtonsGrid(QGridLayout):
             else:
                 result = eval(self.equation)
             result = NumTransform(result)
-        except ZeroDivisionError as e:
-            self._showError(f"Erro: {e}")
+        except SyntaxError:
+             self._Clear()
+             self._showError("Conta incompleta")
+        except ZeroDivisionError:
+            self._showError(f"Erro de divisao por zero")
         except OverflowError as e:
             self._showError(f"Erro 45: {e}")
         self.display.clear()
@@ -151,8 +154,17 @@ class ButtonsGrid(QGridLayout):
         self._op = None
         self.equation = ''
         self.display.clear()
-    def _showError(self, text):
+    
+    def _makeDialog(self, text):
         msgBox = self.window.makeMsgBox()
         msgBox.setText(text)
+        return msgBox
+    def _showError(self, text):
+        msgBox = self._makeDialog(text)
         msgBox.setIcon(msgBox.Icon.Critical)
+        msgBox.exec()
+    def _showInfo(self, text):
+        msgBox = self._makeDialog(text)
+        msgBox.setText(text)
+        msgBox.setIcon(msgBox.Icon.Information)
         msgBox.exec()
