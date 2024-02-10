@@ -53,6 +53,7 @@ class ButtonsGrid(QGridLayout):
         self._equation = value
         self.info.setText(value)
     def _makeGrid(self):
+        self.display.eqRequested.connect(lambda: print('123'))
         for i, row in enumerate(self._gridMask):
             for j, text in enumerate(row):
                 if j == 1 and i == 4:
@@ -89,7 +90,7 @@ class ButtonsGrid(QGridLayout):
             self._connectButtonClicked(button, 
             self._makeButtonDisplaySlot(self._OperatorClicked,button))
         
-        if text in '=':
+        if text == '=':
             self._connectButtonClicked(button, self._eq)
     def _makeButtonDisplaySlot(self, func, *args, **kwargs):
 
