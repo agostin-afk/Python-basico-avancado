@@ -53,7 +53,13 @@ class ButtonsGrid(QGridLayout):
         self._equation = value
         self.info.setText(value)
     def _makeGrid(self):
-        self.display.eqRequested.connect(lambda: print('123'))
+        
+        self.display.eqPressed.connect(lambda: print('123'))
+        
+        self.display.clearPressed.connect()
+        
+        self.display.delPressed.connect(self.display.backspace)
+        
         for i, row in enumerate(self._gridMask):
             for j, text in enumerate(row):
                 if j == 1 and i == 4:

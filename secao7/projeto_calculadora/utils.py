@@ -27,3 +27,7 @@ def isValidNumber(string: str):
         valid = False
     return valid
 
+def isEmpty(string: str):
+    return len(string)==0
+    
+
