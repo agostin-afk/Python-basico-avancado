@@ -2,12 +2,14 @@ from PySide6.QtGui import QKeyEvent
 from PySide6.QtWidgets import QLineEdit
 from variables import *
 from  PySide6.QtCore import Qt, Signal
-from utils import isEmpty
+from utils import isEmpty, NumOrDot
 
 class Display(QLineEdit):
     eqPressed = Signal()
     delPressed = Signal()
     clearPressed = Signal()
+    inputPressed = Signal(str)
+    operatorPressed = Signal(str)
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -27,6 +29,11 @@ class Display(QLineEdit):
         isEnter = key in [KEYS.Key_Enter, KEYS.Key_Return]
         isDelete = key in [KEYS.Key_Delete, KEYS.Key_Backspace]
         isEsc = key in [KEYS.Key_Escape]
+        isOperator = key in [KEYS.Key_Plus,
+                             KEYS.Key_Minus,
+                             KEYS.Key_Slash,
+                             KEYS.Key_Asterisk,
+                             KEYS.Key_P]
         
         if isEnter or text == '=':
             self.eqPressed.emit()
@@ -39,5 +46,15 @@ class Display(QLineEdit):
         if isEsc:
             self.clearPressed.emit()
             return event.ignore()
+        
+        if isOperator:
+            if text.lower() == 'p':
+                text = '^'
+            self.operatorPressed.emit(text)
+            return event.ignore()
+        
         if isEmpty(text):
+            return event.ignore()
+        if NumOrDot(text):
+            self.inputPressed.emit(text)
             return event.ignore()

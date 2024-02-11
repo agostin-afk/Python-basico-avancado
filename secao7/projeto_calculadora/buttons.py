@@ -56,9 +56,12 @@ class ButtonsGrid(QGridLayout):
         
         self.display.eqPressed.connect(lambda: print('123'))
         
-        self.display.clearPressed.connect()
+        self.display.clearPressed.connect(self._Clear)
         
         self.display.delPressed.connect(self.display.backspace)
+        
+        self.display.inputPressed.connect(lambda text: print(f'foi o inputPressed {text}'))
+        self.display.operatorPressed.connect(lambda text: print(f'foi o operatorPressed {text}'))
         
         for i, row in enumerate(self._gridMask):
             for j, text in enumerate(row):
