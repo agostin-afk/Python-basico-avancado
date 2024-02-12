@@ -58,7 +58,7 @@ class ButtonsGrid(QGridLayout):
         
         self.display.clearPressed.connect(self._Clear)
         
-        self.display.delPressed.connect(self.display.backspace)
+        self.display.delPressed.connect(self._backspace)
         
         self.display.inputPressed.connect(self._insertTextToDisplay)
         self.display.operatorPressed.connect(self._configLeftOp)
@@ -95,7 +95,7 @@ class ButtonsGrid(QGridLayout):
             self._connectButtonClicked(button, self._Clear)
             
         if text == '◀':
-            self._connectButtonClicked(button, self.display.backspace)
+            self._connectButtonClicked(button, self._backspace)
             
         if text in '+-*/^':
             self._connectButtonClicked(button, 
@@ -115,7 +115,7 @@ class ButtonsGrid(QGridLayout):
         if not isValidNumber(newDisplayValue):
             return
         self.display.insert(buttonText)
-
+        self.display.setFocus()
     @Slot()
     def _eq(self):
         displayText = self.display.text()
@@ -146,7 +146,7 @@ class ButtonsGrid(QGridLayout):
         self._right = None
         if result == 'Estouro':
             self._left = None
-        
+        self.display.setFocus()
     @Slot()
     def _configLeftOp(self, text):
         displayText = self.display.text()
@@ -163,9 +163,13 @@ class ButtonsGrid(QGridLayout):
         print(self.equation)
         self._op = text
         self.equation = f'{self._left} {self._op}'
-        
+        self.display.setFocus()
         print(text)
         
+    @Slot()
+    def _backspace(self):
+        self.display.backspace()
+        self.display.setFocus()
     @Slot()
     def _Clear(self):
         self._left = None
@@ -173,6 +177,7 @@ class ButtonsGrid(QGridLayout):
         self._op = None
         self.equation = ''
         self.display.clear()
+        self.display.setFocus()
     
     def _makeDialog(self, text):
         msgBox = self.window.makeMsgBox()
@@ -182,8 +187,10 @@ class ButtonsGrid(QGridLayout):
         msgBox = self._makeDialog(text)
         msgBox.setIcon(msgBox.Icon.Critical)
         msgBox.exec()
+        self.display.setFocus()
     def _showInfo(self, text):
         msgBox = self._makeDialog(text)
         msgBox.setText(text)
         msgBox.setIcon(msgBox.Icon.Information)
         msgBox.exec()
+        self.display.setFocus()
