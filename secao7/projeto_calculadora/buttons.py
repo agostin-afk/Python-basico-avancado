@@ -100,7 +100,6 @@ class ButtonsGrid(QGridLayout):
         if text in '+-*/^':
             self._connectButtonClicked(button, 
             self._makeButtonDisplaySlot(self._configLeftOp, text))
-        
         if text == '=':
             self._connectButtonClicked(button, self._eq)
     @Slot()
@@ -125,6 +124,7 @@ class ButtonsGrid(QGridLayout):
         self._right = NumTransform(displayText)
         self.equation = f'{self._left} {self._op} {self._right}'
         print(self.equation)
+        print(self._left)
         result = 'Estouro'
         try:
             if '^' in self.equation and isinstance(self._left, (float, int)):
@@ -152,11 +152,15 @@ class ButtonsGrid(QGridLayout):
         displayText = self.display.text()
         self.display.clear()
        
-        if  not isValidNumber(displayText) and self._left is None:
-            self._showError('nada no valor da esquerda')
-        
+        if  not isValidNumber(displayText):
+            ...
+            #self._showError('valor invalido')
         if self._left is None:
-            self._left = NumTransform(displayText)
+            if displayText == '':
+                self._left = 0
+            else:
+                self._left = NumTransform(displayText)
+        print(self.equation)
         self._op = text
         self.equation = f'{self._left} {self._op}'
         
