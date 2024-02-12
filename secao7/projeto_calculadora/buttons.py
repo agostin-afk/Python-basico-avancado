@@ -123,12 +123,9 @@ class ButtonsGrid(QGridLayout):
             return
         self._right = NumTransform(displayText)
         self.equation = f'{self._left} {self._op} {self._right}'
-        print(self.equation)
-        print(self._left)
         result = 'Estouro'
         try:
             if '^' in self.equation and isinstance(self._left, (float, int)):
-                print(result)
                 result = math.pow(self._left, self._right)
             else:
                 result = eval(self.equation)
@@ -160,11 +157,9 @@ class ButtonsGrid(QGridLayout):
                 self._left = 0
             else:
                 self._left = NumTransform(displayText)
-        print(self.equation)
         self._op = text
         self.equation = f'{self._left} {self._op}'
         self.display.setFocus()
-        print(text)
         
     @Slot()
     def _backspace(self):
