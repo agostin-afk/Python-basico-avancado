@@ -1,21 +1,24 @@
 import re
 
 NUM_OR_DOT = re.compile(r'^[0-9.]$')
-def NumOrDot(string:str) -> bool:
+
+
+def NumOrDot(string: str) -> bool:
     return bool(NUM_OR_DOT.search(string))
 
-def NumTransform(string:str) -> (float | int):
+
+def NumTransform(string: str) -> (float | int):
     try:
         float(string)
     except ValueError as e:
-        print(f"Erro de valor: {e}")  
+        print(f"Erro de valor: {e}")
     try:
         if float(string) == int(float(string)):
             return int(float(string))
         else:
             return float(string)
     except ValueError as e:
-        return f'Erro 45: {e}'
+        return f'Erro 45: {e}'  # type: ignore
 
 
 def isValidNumber(string: str):
@@ -27,7 +30,6 @@ def isValidNumber(string: str):
         valid = False
     return valid
 
-def isEmpty(string: str):
-    return len(string)==0
-    
 
+def isEmpty(string: str):
+    return len(string) == 0

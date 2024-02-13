@@ -13,27 +13,20 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     setupTheme()
     window = MainWindow()
-    
-    
+
     info = Infor('Calculadora')
     window.addWidgetVlayout(info, False)
-    
-    
+
     display = Display()
-    window.addWidgetVlayout(display,False)
-    
-    
+    window.addWidgetVlayout(display, False)
+
     buttonsGrid = ButtonsGrid(display, info, window)
     window.vLayout.addLayout(buttonsGrid)
     window.adjustFixedSize()
-    
-    
-    
+
     icon = QIcon(str(ICON_FILE))
     window.setWindowIcon(icon)
     app.setWindowIcon(icon)
-    
-    
-    
+
     window.show()
     app.exec()

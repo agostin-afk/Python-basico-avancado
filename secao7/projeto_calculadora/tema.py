@@ -1,5 +1,7 @@
 import qdarktheme
-from variables import *
+from variables import (PRIMARY_COLOR,
+                       DARKER_PRIMARY_COLOR,
+                       DARKEST_PRIMARY_COLOR)
 
 
 qss = f"""
@@ -17,11 +19,12 @@ qss = f"""
     }}
 """
 
+
 def setupTheme():
     qdarktheme.setup_theme(
-        theme= 'dark',
-        corner_shape= 'rounded',
-        custom_colors= {
+        theme='dark',
+        corner_shape='rounded',
+        custom_colors={
             '[dark]': {
                 'primary': PRIMARY_COLOR
             },
@@ -29,5 +32,5 @@ def setupTheme():
                 'primary': PRIMARY_COLOR
             }
         },
-        additional_qss= qss
+        additional_qss=qss
     )
