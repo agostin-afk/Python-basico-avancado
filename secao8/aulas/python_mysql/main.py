@@ -66,3 +66,11 @@ with connection:
 #        cursor.execute(sql, ('agosto', 45))
         cursor.executemany(sql, data2)
         connection.commit()
+    with connection.cursor() as cursor:
+        sql = (
+            f'SELECT * FROM {TABLE_NAME} '
+        )
+        cursor.execute(sql)
+        data3 = cursor.fetchall()
+        for row in data3:
+            print(row)
