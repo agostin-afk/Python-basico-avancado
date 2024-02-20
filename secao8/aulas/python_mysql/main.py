@@ -67,10 +67,15 @@ with connection:
         cursor.executemany(sql, data2)
         connection.commit()
     with connection.cursor() as cursor:
+        menor_id = int(input('informe o menor id: '))
+        maior_id = int(input('informe o maior id: '))
+        coluna = 'id'
         sql = (
             f'SELECT * FROM {TABLE_NAME} '
+            f'WHERE id BETWEEN %s AND %s '
         )
-        cursor.execute(sql)
+        cursor.execute(sql, (menor_id, maior_id))
+        print(cursor.mogrify(sql, (menor_id, maior_id)))
         data3 = cursor.fetchall()
         for row in data3:
             print(row)
