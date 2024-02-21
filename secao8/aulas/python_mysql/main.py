@@ -66,6 +66,7 @@ with connection:
 #        cursor.execute(sql, ('agosto', 45))
         cursor.executemany(sql, data2)
         connection.commit()
+        '''
     with connection.cursor() as cursor:
         menor_id = int(input('informe o menor id: '))
         maior_id = int(input('informe o maior id: '))
@@ -78,4 +79,17 @@ with connection:
         print(cursor.mogrify(sql, (menor_id, maior_id)))
         data3 = cursor.fetchall()
         for row in data3:
+            print(row)
+        '''
+    with connection.cursor() as cursor:
+        sql = (
+            f'DELETE FROM {TABLE_NAME} '
+        )
+        cursor.execute(sql)
+        connection.commit()
+        cursor.execute(
+            f'SELECT * FROM {TABLE_NAME} '
+        )
+        data4 = cursor.fetchall()
+        for row in data4:
             print(row)
