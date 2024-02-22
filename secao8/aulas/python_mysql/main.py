@@ -61,7 +61,11 @@ with connection:
         data2 = (
             {"nome": "Lucas", "idade": 21},
             {"nome": "Maria", "idade": 24},
-            {"nome": "Agostinho", "idade": 25}
+            {"nome": "Agostinho", "idade": 25},
+            {"nome": "Lucas", "idade": 26},
+            {"nome": "Pedro", "idade": 19},
+            {"nome": "jose", "idade": 18},
+            {"nome": "will", "idade": 17},
         )
 #        cursor.execute(sql, ('agosto', 45))
         cursor.executemany(sql, data2)
@@ -82,8 +86,11 @@ with connection:
             print(row)
         '''
     with connection.cursor() as cursor:
+        cursor.execute(f"SELECT * FROM {TABLE_NAME} ")
+        row = cursor.fetchall()
+        print(*row, sep='\n')
         sql = (
-            f'DELETE FROM {TABLE_NAME} '
+            f'DELETE FROM {TABLE_NAME} WHERE id = "4" '
         )
         cursor.execute(sql)
         connection.commit()
