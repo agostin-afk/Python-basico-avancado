@@ -97,6 +97,19 @@ with connection:
         cursor.execute(
             f'SELECT * FROM {TABLE_NAME} '
         )
+        os.system('cls')
         data4 = cursor.fetchall()
         for row in data4:
+            print(row)
+    with connection.cursor() as cursor:
+        sql = (
+            f'UPDATE {TABLE_NAME} SET nome="Agosto" WHERE id = %s '
+        )
+        cursor.execute(sql, (8))
+        connection.commit()
+        cursor.execute(
+            f'SELECT * FROM {TABLE_NAME} '
+        )
+        data5 = cursor.fetchall()
+        for row in data5:
             print(row)
