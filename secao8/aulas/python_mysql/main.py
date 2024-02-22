@@ -1,4 +1,5 @@
 import pymysql
+import pymysql.cursors
 import dotenv
 import os
 from pathlib import Path
@@ -13,6 +14,7 @@ connection = pymysql.Connection(
     password=os.environ['MYSQL_PASSWORD'],
     database=os.environ['MYSQL_DATABASE'],
     port=int(os.environ['MYSQL_PORT']),
+    cursorclass=pymysql.cursors.DictCursor,
 )
 
 """
@@ -87,8 +89,6 @@ with connection:
         '''
     with connection.cursor() as cursor:
         cursor.execute(f"SELECT * FROM {TABLE_NAME} ")
-        row = cursor.fetchall()
-        print(*row, sep='\n')
         sql = (
             f'DELETE FROM {TABLE_NAME} WHERE id = "4" '
         )
@@ -99,8 +99,6 @@ with connection:
         )
         os.system('cls')
         data4 = cursor.fetchall()
-        for row in data4:
-            print(row)
     with connection.cursor() as cursor:
         sql = (
             f'UPDATE {TABLE_NAME} SET nome="Agosto" WHERE id = %s '
