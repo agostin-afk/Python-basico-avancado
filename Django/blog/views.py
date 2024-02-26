@@ -2,7 +2,22 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def blog(request):
-    return render(request, 'blog/home.html')
+    context = {
+            'texto': 'Bem-vindo ao Blog',
+            }
+    return render(
+        request,
+        'blog/home.html',
+        context
+    )
 
 def exemplo(request):
-    return render(request, 'blog/exemplo.html')
+    context = {
+            'texto': 'Bem-vindo ao Exemplo',
+            'title': 'Pagina de Exemplo - ',
+            }
+    return render(
+        request,
+        'blog/exemplo.html',
+        context
+    )
