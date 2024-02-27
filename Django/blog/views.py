@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from blog.data import posts
 def blog(request):
     context = {
             'texto': 'Bem-vindo ao Blog',
+            'posts': posts
             }
     return render(
         request,
