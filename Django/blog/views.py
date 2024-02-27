@@ -22,3 +22,18 @@ def exemplo(request):
         'blog/exemplo.html',
         context
     )
+def post(request, post_id):
+    found_post = None
+    for post in posts:
+        if post['id'] == post_id:
+            found_post = post
+            break
+    context = {
+        'post': found_post
+    }
+
+    return render(
+        request,
+        'blog/post.html',
+        context
+    )

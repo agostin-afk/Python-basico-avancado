@@ -19,7 +19,7 @@ body {
   box-shadow: 8px 6px 5px rgb(72, 72, 72);
 }
 @media (min-width: 600px){
-  .content {
+  .content:not(:has(.single-post)) {
     grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
   }
 }
