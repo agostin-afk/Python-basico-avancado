@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest, Http404
 from blog.data import posts
+from typing import Any
 def blog(request):
     context = {
             'texto': 'Bem-vindo ao Blog',
@@ -22,14 +23,18 @@ def exemplo(request):
         'blog/exemplo.html',
         context
     )
-def post(request, post_id):
-    found_post = None
+def post(request: HttpRequest, post_id: int):
+    found_post: dict[str, Any] | None = None
+    
     for post in posts:
         if post['id'] == post_id:
             found_post = post
             break
+    if found_post is None:
+        raise Http404("Post not found")
     context = {
-        'post': found_post
+        'post': found_post,
+        'title': found_post['title'] + '-',
     }
 
     return render(
