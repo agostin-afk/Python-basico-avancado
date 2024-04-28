@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background: #252525;
+  color: #fff;
+  font-family: 'Courier New', monospace;
+}
+.content{
+  display: grid;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+.post{
+  background-color: #111111;
+  padding: 1.5rem;
+  box-shadow: 8px 6px 5px rgb(72, 72, 72);
+}
+.menu{
+  background-color: #111111;
+  padding: 1.5rem;
+}
+a{
+  color:#a0a0a0;
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+}
+.menu_links {
+  list-style: none;
+  display: flex;
+}
+
+.menu_links a {
+  display: block;
+  color: #fff;
+  padding: 0.5rem;
+}
+
+@media (min-width: 600px){
+  .content:not(:has(.single-post)) {
+    grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
+  }
+}
