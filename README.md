@@ -42,7 +42,7 @@ pip install -r requirements.txt
   <br></br>
   <br></br>
 <p></p>
-  <p>Aqui é um exemplo de como ficaria as postagens nesse blog, feita com conceitos elementares</p>
+  <p>Aqui é um exemplo de como ficaria as postagens nesse blog, feita com conceitos elementares.</p>
   <img src="https://github.com/agostin-afk/Python-basico-avancado/assets/67163625/1d067e1d-c95d-43f5-9852-f463b3d16e7d" width="700">
   <br></br>
   <br></br>
