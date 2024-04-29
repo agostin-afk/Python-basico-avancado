@@ -21,6 +21,6 @@ nome_ambienteVirtual/Scripts/Activate.ps1
 pip install -r requirements.txt
 ```
 #### Para rodar o projeto de introdução ao Django:
-- rode o seguinte codigo na pasta raiz do repositório:<br></br>
+- rode o seguinte codigo na pasta raiz do repositório: 
 ``` pip install -r django_basico_requirements.txt```
-- Navegue até a pasta _Django(```bash cd Django``` na raiz do repositório)_ e siga os mesmos passos de instalação do [projeto da agenda](https://github.com/agostin-afk/agenda_django).
+- Navegue até a pasta _Django( ``` cd Django``` na raiz do repositório)_ e siga os mesmos passos de instalação do [projeto da agenda](https://github.com/agostin-afk/agenda_django).
