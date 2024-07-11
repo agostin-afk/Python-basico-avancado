@@ -22,7 +22,7 @@ DateTime==5.4
 debugpy==1.8.0
 decorator==5.1.1
 defusedxml==0.8.0rc2
-Django==5.0.3
+Django==5.0.7
 django-cors-headers==4.3.1
 django-debug-toolbar==4.2.0
 django-templated-mail==1.1.1
